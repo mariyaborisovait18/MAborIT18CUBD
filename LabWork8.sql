@@ -47,15 +47,21 @@ grant select on books to reader;
 
 -- Librarian: может читать и управлять таблицей borrowings (выдача книг)
 grant select, insert, update, delete on borrowings to librarian;
+grant usage, select on sequence borrowings_borrowing_id_seq to librarian;
 
 -- Manager: может добавлять новых авторов и книги
 grant select, insert on authors to manager;
 grant select, insert on books to manager;
+grant usage, select on sequence authors_author_id_seq to manager;
+grant usage, select on sequence books_book_id_seq to manager;
 
 -- Группа staff: доступ на чтение таблиц
 grant usage on schema public to reader;
 grant usage on schema public to librarian;
 grant usage on schema public to manager;
+
+-- Заполнение некоторых данных для будующей проверки
+insert into books(title) values ('Алгоритмы');
 
 -- 4) Тестирование прав доступа
 -- Для тестирования нужно подключаться под разными пользователями.
